@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, Platform, ScrollView, Linking } from 'react-native';
 import { MapView } from 'expo';
-import { Card, Button } from 'react-native-elements';
+import { Card, Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 class ReviewScreen extends Component {
-    static navigationOptions = ({ navigation }) => ({
+    static navigationOptions = {
         title: 'Review Jobs',
+        tabBarLabel: 'Review Jobs',
+        tabBarIcon: ({ tintColor }) => {
+            return <Icon name='favorite' size={30} color={tintColor} />
+        },
         headerRight:
             (<Button
                 title='Settings'
@@ -18,11 +22,13 @@ class ReviewScreen extends Component {
         style: {
             marginTop: Platform.OS === 'android' ? 24 : 0
         }
-    });
+    };
 
     renderLikedJobs() {
         return this.props.likedJobs.map(job => {
-            const { company, url, formattedRelativeTime, latitude, longitude } = job;
+            const { 
+                company, url,formattedRelativeTime, 
+                latitude, longitude, jobtitle, jobkey } = job;
             const initialRegion = {
                 latitude,
                 longitude,
@@ -31,7 +37,10 @@ class ReviewScreen extends Component {
             };
 
             return (
-                <Card>
+                <Card
+                    title={jobtitle}
+                    key={jobkey}
+                >
                     <View style={{ height: 200 }}>
                         <MapView
                             style={{ flex: 1 }}
