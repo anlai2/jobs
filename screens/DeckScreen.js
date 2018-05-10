@@ -21,7 +21,7 @@ class DeckScreen extends Component {
                     <MapView
                         scrollEnabled={false}
                         style={{ flex: 1 }}
-                        cacheEnable={Platform.OS === 'android' ? true : false}
+                        cacheEnable={Platform.OS === 'android'}
                         initialRegion={initialRegion}
                     >
 
@@ -72,4 +72,4 @@ function mapStateToProps({ jobs }) {
     return { jobs: jobs.results }
 }
 
-export default connect(mapStateToProps)(DeckScreen);
+export default connect(mapStateToProps, actions)(DeckScreen);
