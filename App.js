@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { Button, Icon } from 'react-native-elements';
 import { Provider } from 'react-redux';
 
 import store from './store';
@@ -23,8 +24,30 @@ export default class App extends React.Component {
 					deck: { screen: DeckScreen },
 					review: {
 						screen: createStackNavigator({
-							review: { screen: ReviewScreen },
+							review: {
+								screen: ReviewScreen,
+								navigationOptions: ({ navigation }) => ({
+									title: 'Review Jobs'
+								})
+							},
 							settings: { screen: SettingsScreen }
+						}),
+						navigationOptions: ({ navigation }) => ({
+							tabBarLabel: 'Review Jobs',
+							tabBarIcon: ({ tintColor }) => {
+								return <Icon name='favorite' size={30} color={tintColor} />
+							},
+							headerRight:
+								(<Button
+									title='Settings'
+									onPress={() => navigation.navigate('settings')}
+									backgroundColor="rgba(0,0,0,0)"
+									color="rgba(0,122,255,1)"
+								/>
+								),
+							style: {
+								marginTop: Platform.OS === 'android' ? 24 : 0
+							}
 						})
 					}
 				})
