@@ -27,7 +27,15 @@ export default class App extends React.Component {
 							review: {
 								screen: ReviewScreen,
 								navigationOptions: ({ navigation }) => ({
-									title: 'Review Jobs'
+									title: 'Review Jobs',
+									headerRight:
+										(<Button
+											title='Settings'
+											onPress={() => navigation.navigate('settings')}
+											backgroundColor="rgba(0,0,0,0)"
+											color="rgba(0,122,255,1)"
+										/>
+										)
 								})
 							},
 							settings: { screen: SettingsScreen }
@@ -37,20 +45,17 @@ export default class App extends React.Component {
 							tabBarIcon: ({ tintColor }) => {
 								return <Icon name='favorite' size={30} color={tintColor} />
 							},
-							headerRight:
-								(<Button
-									title='Settings'
-									onPress={() => navigation.navigate('settings')}
-									backgroundColor="rgba(0,0,0,0)"
-									color="rgba(0,122,255,1)"
-								/>
-								),
 							style: {
 								marginTop: Platform.OS === 'android' ? 24 : 0
 							}
 						})
 					}
-				})
+				}, {
+					tabBarPosition: 'bottom',
+					tabBarOptions: {
+						labelStyle: { fontSize: 12 }
+					}
+				}),
 			}
 		}, {
 				navigationOptions: { tabBarVisible: false },
