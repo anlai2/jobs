@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 import { connect } from 'react-redux';
-import { clearLikedJobs } from '../actions';
 import { Button } from 'react-native-elements';
+import { clearLikedJobs } from '../actions';
 
 class SettingsScreen extends Component {
-    static navigationOptions = {
-        header: {
-            style: {
-                marginTop: Platform.OS === 'android' ? 24 : 0
-            }
-        }
-    }
+  static navigationOptions = {
+    header: {
+      style: {
+        marginTop: Platform.OS === 'android' ? 24 : 0,
+      },
+    },
+  };
 
-    render() {
-        return (
-            <View>
-                <Button
-                    title="Clear Liked Jobs"
-                    large
-                    icon={{ name: 'delete-forever' }}
-                    backgroundColor='#F44336'
-                    onPress={this.props.clearLikedJobs}
-                />
-            </View>
-        )
-    }
+  render() {
+    return (
+      <View>
+        <Button
+          title="Clear Liked Jobs"
+          large
+          icon={{ name: 'delete-forever' }}
+          backgroundColor="#F44336"
+          onPress={this.props.clearLikedJobs}
+        />
+      </View>
+    );
+  }
 }
 
 export default connect(null, { clearLikedJobs })(SettingsScreen);
